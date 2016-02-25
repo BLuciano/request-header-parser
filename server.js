@@ -4,9 +4,13 @@ var ip, lang, os;
 
 app.get('/', function(req, res) {
   var headerData = req.headers;
+  console.log(headerData);
   ip = headerData['x-forwarded-for'];
   lang = headerData['accept-language'];
+  lang = lang.split(",")[0];
   os = headerData['user-agent'];
+  os = os.split("(");
+  os = os[1].split(")")[0];
 
   res.send({
     "ipaddress": ip,
